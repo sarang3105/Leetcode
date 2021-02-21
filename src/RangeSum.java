@@ -8,6 +8,10 @@ import java.util.*;
  */
 public class RangeSum {
 
+    public static void main(String[] args) {
+        NumArray a = new NumArray(new int[] {9, 8});
+    }
+
     static class NumArray {
 
         private int[] st;
@@ -43,6 +47,7 @@ public class RangeSum {
             if(index < start || index > end) {
                 return;
             }
+
             st[root] = (st[root] - curr) + val;
             if (start != end) {
                 int mid = getMid(start, end);
@@ -55,7 +60,7 @@ public class RangeSum {
         }
 
         private int sum(int left, int right, int start, int end, int root) {
-            if (left >= start && right <= end) {
+            if (left <= start && right >= end) {
                 return st[root];
             } else if (left > end || right < start){
                 return 0;
@@ -65,8 +70,8 @@ public class RangeSum {
             return sum(left, right, start, mid, left(root)) + sum(left, right, mid + 1, end, right(root));
         }
 
-        private int getMid(int i, int j) {
-            return (i + j) / 2;
+        private int getMid(int lo, int hi) {
+            return lo + (hi + lo) / 2;
         }
 
         private int left(int i) {
