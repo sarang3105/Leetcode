@@ -3,7 +3,7 @@ import java.lang.*;
 import java.util.*;
 
 /**
- * @link
+ * @link https://leetcode.com/problems/kth-largest-element-in-a-stream/
  */
 class KthLargest {
 
@@ -13,20 +13,12 @@ class KthLargest {
     public KthLargest(int k, int[] nums) {
         this.k = k;
         this.pq = new PriorityQueue<>();
-        for (int i : nums) {
-            addPQ(i);
-        }
+        for (int i : nums) addPQ(i);
     }
 
     public void addPQ(int val) {
-        if (pq.size() < k) {
-            pq.add(val);
-        } else if (pq.size() == k){
-            if (pq.peek() < val) {
-                pq.poll();
-                pq.add(val);
-            }
-        }
+        pq.add(val);
+        if (pq.size() > k) pq.poll();
     }
     public int add(int val) {
         addPQ(val);
